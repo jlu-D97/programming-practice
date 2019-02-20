@@ -1,0 +1,46 @@
+"""
+The aim of this program is to search in a sorted 2D array to find out if the 2D array contains the input integer
+
+created by Jiaqi Lu, 19 Feb 2019
+
+"""
+"""
+solution 1: naive approach, loop through every element in the array. 
+solution 2: start from the top right corner, if the the element is smaller than the target, move down, if the element is
+bigger than the target, move left 
+
+This file contians the implementation of both 2 solutions in Python
+"""
+class Solution:
+
+    """solution 1"""
+    def searchIn2d1(self, theArray,target):
+        for i in range(len(theArray)):
+            for j in range(len(theArray[i])):
+                if theArray[i][j]==target:
+                    return i, j
+        return False
+        
+        
+        
+    """solution 2"""
+    def searchIn2d2(self,theArray,target):
+        rows=len(theArray)
+        cols=len(theArray[0])
+        row=0
+        col=cols-1
+        while row<=rows and col>=0:
+            if theArray[row][col]>target:
+                col-=1
+            elif theArray[row][col]<target:
+                row+=1
+            else:
+                return row,col
+        return False
+
+
+
+
+a= Solution()
+print(a.searchIn2d1([[1.2,2.2,3.2],[4.2,5.2,6],[7.3,8.4,9]],0))
+print(a.searchIn2d2([[1.2,2.2,3.2],[4.2,5.2,6],[7.3,8.4,9]],0))
