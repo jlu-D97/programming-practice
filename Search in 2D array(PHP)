@@ -1,0 +1,80 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * The aim of this program is to search in a sorted 2D array to find out if the 2D array contains the input integer
+ * User: Jiaqi
+ * Date: 2019-02-19
+ * Time: 17:59
+ */
+ 
+ /*
+ * solution 1: naive approach, loop through every element in the array. 
+ * solution 2: start from the top right corner, if the the element is smaller than the target, move down, if the element is
+ * bigger than the target, move left  
+ */
+/**
+ * solution 1
+ * @param $target the target that should be searched in the array 
+ * @param $theArray a sorted 2d array which has same number of columns in each row.
+ * @return bool the result that shows if the target in the array 
+ */
+function searchIn2D1($target, $theArray)
+{
+    $check=false;
+
+    for ($i=0; $i <count($theArray); $i++) {
+            for ($j=0; $j <count($theArray[0]); $j++) {
+
+                if ($theArray[$i][$j] == $target) {
+                    echo $i;//print the coordinates of the target in the array
+                    echo $j;
+                    $check=true;
+                }
+
+
+            }
+    }
+
+    return $check;
+
+}
+
+/**
+ * solution 2
+ * @param $target the target that should be searched in the array 
+ * @param $theArray a sorted 2d array which has same number of columns in each row.
+ * @return bool the result that shows if the target in the array 
+ */
+
+function searchIn2D2($target, $theArray)
+{
+    $rows=count($theArray);
+    $cols=count($theArray[0]);
+    $row=0;
+    $col=$cols-1;
+    $check=false;
+    while($row<=$rows || $col>=0)// make sure the index inside the range
+    {
+        if($theArray[$row][$col]>$target)
+        {
+            $col--;
+        }
+        elseif($theArray[$row][$col]<$target)
+        {
+            $row++;
+        }
+        else{
+            echo $row;//print the coordinates of the target in the array
+            echo $col;
+            $check=true;
+
+        }
+    }
+
+    return $check;
+
+}
+
+
+$s = [[1, 2, 8, 9], [2, 4, 9, 12], [4, 7, 10, 13], [6, 8, 11, 15]];
+var_dump(searchIn2D2(9, $s));
